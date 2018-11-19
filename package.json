@@ -7,6 +7,8 @@
     "axios": "^0.18.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-grid-system": "^4.3.1",
+    "react-image": "^1.5.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "reactstrap": "^6.5.0"

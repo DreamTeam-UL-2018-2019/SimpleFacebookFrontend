@@ -81,7 +81,7 @@ class Login extends Component{
                     <Button variant="raised" color="primary" onClick={this.register}> Sign up </Button>
                 </form>
             </div>
-              );
+        );
     
     };
 }

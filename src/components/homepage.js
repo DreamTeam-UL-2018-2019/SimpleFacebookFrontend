@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import {Redirect} from 'react-router-dom';
-import { Container, Row, Col } from 'react-grid-system';
-import Image from 'react-image';
-import img from '../img/Retro.jpg';
-import testImg from '../img/Test.jpg';
 //import { Grid, Paper} from "@material-ui/core";
 import axios from 'axios';
 import './login.css';
+
 
 class HomePage extends Component{
     constructor(props)
     {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
+            color: 'red'
         }
         this.logout = this.logout.bind(this);
         this.test = this.test.bind(this);
@@ -62,22 +60,11 @@ class HomePage extends Component{
             return (<Redirect to={'/login'} />)
         }
 
-
         return (
-            <Container fluid style={{ lineHeight: '32px' }}>
-                <Row>
-                    <Col md={3} ><Image src={img}/></Col>
-                    <Col md={6} >
-                        <div>
-                            <Image src={testImg}>
-                
-                            </Image>
-                        </div>
-                    </Col>
-                    <Col md={3} ><Image src={img}/></Col>
-                </Row>
-            </Container>
-          );
+            <div>
+                <style> { 'body {background-image:url("./Test.jpg");}' } </style>
+            </div>
+        );
     };
 }
 export default HomePage;

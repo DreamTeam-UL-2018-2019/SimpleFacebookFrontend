@@ -62,7 +62,7 @@ class HomePage extends Component{
 
         return (
             <div>
-                <style> { 'body {background-image:url("./Test.jpg");}' } </style>
+                <style> { `body {background-image: url("img/Retro.jpg");}` } </style>
             </div>
         );
     };

@@ -112,6 +112,7 @@ class HomePage extends Component{
                         </NavText>
                     </NavItem>
                 </SideNav.Nav>
+                {/* https://reactjsexample.com/react-side-nav-component/ */}
             </SideNav>
         );
     };

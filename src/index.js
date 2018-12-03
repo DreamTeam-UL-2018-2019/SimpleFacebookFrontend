@@ -7,13 +7,16 @@ import Register from './components/register';
 import HomePage from './components/homepage';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <div>
+        <BrowserRouter>
         <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/home" component={HomePage} />
             <Route component={Login}/>
         </Switch>
-    </BrowserRouter>,
+    </BrowserRouter>
+    
+    </div>,
     document.getElementById('login')
 );

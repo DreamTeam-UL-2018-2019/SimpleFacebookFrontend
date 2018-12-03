@@ -4,13 +4,21 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.5.1",
+    "@trendmicro/react-sidenav": "^0.4.5",
     "axios": "^0.18.0",
+    "link-react": "^3.0.0",
     "react": "^16.6.3",
+    "react-atmosphere-menu": "^0.5.4",
+    "react-burger-menu": "^2.5.4",
     "react-dom": "^16.6.3",
     "react-grid-system": "^4.3.1",
+    "react-hamburger-menu": "^1.1.1",
     "react-image": "^1.5.1",
+    "react-native-off-canvas-menu": "^0.1.32",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
+    "react-slide-menu": "^0.5.1",
+    "react-slider-menu": "^0.2.3",
     "reactstrap": "^6.5.0"
   },
   "scripts": {

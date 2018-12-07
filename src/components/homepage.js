@@ -70,12 +70,6 @@ class HomePage extends Component{
         {
             return (<Redirect to={'/login'} />)
         }
-        
-        var nav = [
-            {id: 'home', label: 'Home', path: '/'},
-            {id: 'about', label: 'About', path: '/about'},
-            {id: 'discover', label: 'Discover', path: '/discover'},
-        ]
 
         return (
             // <SlideMenu active={this.state.slideMenuActive} nav={nav} closeMenu={() => this.setState({slideMenuActive: false})}>
@@ -97,18 +91,26 @@ class HomePage extends Component{
                 <SideNav.Nav defaultSelected="home">
                     <NavItem eventKey="home">
                         <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                        <i class="material-icons">home</i>
                         </NavIcon>
                         <NavText>
                             Home
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="devices">
+                    <NavItem eventKey="settings">
                         <NavIcon>
-                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                        <i class="material-icons">settings</i>
                         </NavIcon>
                         <NavText>
-                            Devices
+                            Settings
+                        </NavText>
+                    </NavItem>
+                    <NavItem eventKey="logout">
+                        <NavIcon>
+                        <i class="material-icons">power_settings_new</i>
+                        </NavIcon>
+                        <NavText>
+                            Logout
                         </NavText>
                     </NavItem>
                 </SideNav.Nav>

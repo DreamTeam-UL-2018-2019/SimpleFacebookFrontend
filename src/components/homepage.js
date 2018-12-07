@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {Redirect} from 'react-router-dom';
-import { Button } from "@material-ui/core";
-import SlideMenu from 'react-slide-menu'
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import axios from 'axios';
 import './login.css';
@@ -72,22 +70,20 @@ class HomePage extends Component{
         }
 
         return (
-            // <SlideMenu active={this.state.slideMenuActive} nav={nav} closeMenu={() => this.setState({slideMenuActive: false})}>
-            //     <div>
-            //         <style> { `body {background-image: url("img/Retro.jpg");}` } </style>
-            //         <Button onClick={this.menuIsOpen}>
-            //             Open Ham
-            //         </Button>
-            //     </div>
-            // </SlideMenu>
-            <SideNav
+            <div>
+                <SideNav style={{background: 'green'}}
                 onSelect={(selected) => {
                     // const to = '/' + selected;
                     // if (location.pathname !== to) {
                     //     history.push(to);
                     // }
+                    if(selected === 'logout')
+                    {
+                        this.logout();
+                    }
                 }}>
-                <SideNav.Toggle />
+                <style> { `body {background-image: url("img/Retro.jpg");}` } </style>
+                <SideNav.Toggle  />
                 <SideNav.Nav defaultSelected="home">
                     <NavItem eventKey="home">
                         <NavIcon>
@@ -114,8 +110,9 @@ class HomePage extends Component{
                         </NavText>
                     </NavItem>
                 </SideNav.Nav>
-                {/* https://reactjsexample.com/react-side-nav-component/ */}
+                {/* don't delete!! https://reactjsexample.com/react-side-nav-component/*/}
             </SideNav>
+            </div>
         );
     };
 }

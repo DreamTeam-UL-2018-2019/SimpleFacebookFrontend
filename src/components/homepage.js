@@ -1,23 +1,12 @@
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom';
-<<<<<<< HEAD
-import { Container, Row, Col } from 'react-grid-system';
-import Image from 'react-image';
-import img from '../img/Retro.jpg';
-import testImg from '../img/Test.jpg';
-//import { Grid, Paper} from "@material-ui/core";
-=======
-import { Button } from "@material-ui/core";
-import SlideMenu from 'react-slide-menu'
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import { Redirect } from 'react-router-dom';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
->>>>>>> 9c6aa4030f35c8933b46abeb3f9ab7b7b82a406d
 import axios from 'axios';
 import './login.css';
 
-class HomePage extends Component{
-    constructor(props) 
-    {
+class HomePage extends Component {
+    constructor(props) {
         super(props);
         this.state = {
             redirect: false,
@@ -29,27 +18,26 @@ class HomePage extends Component{
     }
 
     static requestHeaders() {
-        return {'AUTHORIZATION': `Bearer ${sessionStorage.token}`}
-      }
+        return { 'AUTHORIZATION': `Bearer ${sessionStorage.token}` }
+    }
 
-    componentWillMount(){
-        if(sessionStorage.getItem("token"))
-        {
+    componentWillMount() {
+        if (sessionStorage.getItem("token")) {
             console.log("Call user feed");
         }
-        else{
-            this.setState({redirect: true});
+        else {
+            this.setState({ redirect: true });
         }
     }
 
-    logout(){
-        sessionStorage.setItem("token",'');
+    logout() {
+        sessionStorage.setItem("token", '');
         sessionStorage.clear();
-        this.setState({redirect: true});
+        this.setState({ redirect: true });
         console.log("Logout.")
     }
 
-    test(){
+    test() {
         const token = sessionStorage.getItem("token");
         console.log("Pobrany token");
         console.log(token);
@@ -57,59 +45,27 @@ class HomePage extends Component{
             withCredentials: true,
             headers: { Authorization: `Bearer ${token}` }
         };
-                
+
         axios.get("http://localhost:50882/api/values/test", headers)
             .then(res => {
                 console.log(res);
             })
     }
 
-    menuIsOpen(){
-        this.setState({slideMenuActive: true})
+    menuIsOpen() {
+        this.setState({ slideMenuActive: true })
     }
 
-    closeMenu(){
-        this.setState({menuOpen: false});
+    closeMenu() {
+        this.setState({ menuOpen: false });
     }
 
-    render()
-    {   
-        if(this.state.redirect)
-        {
+    render() {
+        if (this.state.redirect) {
             return (<Redirect to={'/login'} />)
         }
-        
-        var nav = [
-            {id: 'home', label: 'Home', path: '/'},
-            {id: 'about', label: 'About', path: '/about'},
-            {id: 'discover', label: 'Discover', path: '/discover'},
-        ]
 
         return (
-<<<<<<< HEAD
-            <Container fluid style={{ lineHeight: '32px' }}>
-                <Row>
-                    <Col md={3} ><Image src={img}/></Col>
-                    <Col md={6} >
-                        <div>
-                            <Image src={testImg}>
-                
-                            </Image>
-                        </div>
-                    </Col>
-                    <Col md={3} ><Image src={img}/></Col>
-                </Row>
-            </Container>
-          );
-=======
-            // <SlideMenu active={this.state.slideMenuActive} nav={nav} closeMenu={() => this.setState({slideMenuActive: false})}>
-            //     <div>
-            //         <style> { `body {background-image: url("img/Retro.jpg");}` } </style>
-            //         <Button onClick={this.menuIsOpen}>
-            //             Open Ham
-            //         </Button>
-            //     </div>
-            // </SlideMenu>
             <SideNav
                 onSelect={(selected) => {
                     // const to = '/' + selected;
@@ -135,11 +91,18 @@ class HomePage extends Component{
                             Devices
                         </NavText>
                     </NavItem>
+                    <NavItem eventKey="logout" onSelect={this.logout} >
+                        <NavIcon>
+                            <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Logout
+                        </NavText>
+                    </NavItem>
                 </SideNav.Nav>
                 {/* https://reactjsexample.com/react-side-nav-component/ */}
             </SideNav>
         );
->>>>>>> 9c6aa4030f35c8933b46abeb3f9ab7b7b82a406d
     };
 }
 export default HomePage;

@@ -1,46 +1,43 @@
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom';
-import { Container, Row, Col } from 'react-grid-system';
-import Image from 'react-image';
-import img from '../img/Retro.jpg';
-import testImg from '../img/Test.jpg';
-//import { Grid, Paper} from "@material-ui/core";
+import { Redirect } from 'react-router-dom';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import axios from 'axios';
 import './login.css';
 
-class HomePage extends Component{
-    constructor(props)
-    {
+class HomePage extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
+            slideMenuActive: false,
         }
         this.logout = this.logout.bind(this);
         this.test = this.test.bind(this);
+        this.menuIsOpen = this.menuIsOpen.bind(this);
     }
 
     static requestHeaders() {
-        return {'AUTHORIZATION': `Bearer ${sessionStorage.token}`}
-      }
+        return { 'AUTHORIZATION': `Bearer ${sessionStorage.token}` }
+    }
 
-    componentWillMount(){
-        if(sessionStorage.getItem("token"))
-        {
+    componentWillMount() {
+        if (sessionStorage.getItem("token")) {
             console.log("Call user feed");
         }
-        else{
-            this.setState({redirect: true});
+        else {
+            this.setState({ redirect: true });
         }
     }
 
-    logout(){
-        sessionStorage.setItem("token",'');
+    logout() {
+        sessionStorage.setItem("token", '');
         sessionStorage.clear();
-        this.setState({redirect: true});
+        this.setState({ redirect: true });
         console.log("Logout.")
     }
 
-    test(){
+    test() {
         const token = sessionStorage.getItem("token");
         console.log("Pobrany token");
         console.log(token);
@@ -48,36 +45,68 @@ class HomePage extends Component{
             withCredentials: true,
             headers: { Authorization: `Bearer ${token}` }
         };
-                
+
         axios.get("http://localhost:50882/api/values/test", headers)
             .then(res => {
                 console.log(res);
             })
     }
 
-    render()
-    {   
-        if(this.state.redirect)
-        {
+    menuIsOpen() {
+        this.setState({ slideMenuActive: true })
+    }
+
+    closeMenu() {
+        this.setState({ menuOpen: false });
+    }
+
+    toChat() {
+        window.location = './public/chatwindow.html';
+    }
+
+    render() {
+        if (this.state.redirect) {
             return (<Redirect to={'/login'} />)
         }
 
-
         return (
-            <Container fluid style={{ lineHeight: '32px' }}>
-                <Row>
-                    <Col md={3} ><Image src={img}/></Col>
-                    <Col md={6} >
-                        <div>
-                            <Image src={testImg}>
-                
-                            </Image>
-                        </div>
-                    </Col>
-                    <Col md={3} ><Image src={img}/></Col>
-                </Row>
-            </Container>
-          );
+            <SideNav
+                onSelect={(selected) => {
+                    // const to = '/' + selected;
+                    // if (location.pathname !== to) {
+                    //     history.push(to);
+                    // }
+                }}>
+                <SideNav.Toggle />
+                <SideNav.Nav defaultSelected="home">
+                    <NavItem eventKey="home">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Home
+                        </NavText>
+                    </NavItem>
+                    <NavItem eventKey="devices">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Devices
+                        </NavText>
+                    </NavItem>
+                    <NavItem eventKey="logout" onSelect={this.logout} >
+                        <NavIcon>
+                            <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Logout
+                        </NavText>
+                    </NavItem>
+                </SideNav.Nav>
+                {/* https://reactjsexample.com/react-side-nav-component/ */}
+            </SideNav>
+        );
     };
 }
 export default HomePage;

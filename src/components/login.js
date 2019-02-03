@@ -10,7 +10,7 @@ class Login extends Component{
     constructor() {
         super();
         this.state = {
-            email: '',
+            mail: '',
             password: '',
             redirect: false,
             isError: false
@@ -23,7 +23,8 @@ class Login extends Component{
     }
 
     login = e => {
-        if(this.state.email && this.state.password)
+        console.log("login");
+        if(this.state.mail && this.state.password)
         {
             PostData('api/values/login', this.state)
             .then((result) => {
@@ -67,8 +68,8 @@ class Login extends Component{
             <div className="Login">
                 <form>
                     <FormGroup>
-                        <TextField id="email-input" label="Email" type="email" name="email"
-                            value={this.state.email} margin="normal" variant="outlined"
+                        <TextField id="email-input" label="Email" type="email" name="mail"
+                            value={this.state.mail} margin="normal" variant="outlined"
                             onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>

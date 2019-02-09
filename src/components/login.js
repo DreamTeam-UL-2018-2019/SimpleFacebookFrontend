@@ -23,7 +23,6 @@ class Login extends Component{
     }
 
     login = e => {
-        console.log("login");
         if(this.state.mail && this.state.password)
         {
             PostData('api/values/login', this.state)

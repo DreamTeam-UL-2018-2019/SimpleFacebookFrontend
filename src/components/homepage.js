@@ -60,8 +60,11 @@ class HomePage extends Component {
         this.setState({ menuOpen: false });
     }
 
-    toChat() {
-        window.location = './public/chatwindow.html';
+    toChat(){
+        window.location = '/ChatApp';
+        //if (this.state.redirect) {
+        //    return (<Redirect to={'/ChatApp'} />)
+        //}
     }
 
     render() {
@@ -72,27 +75,27 @@ class HomePage extends Component {
         return (
             <SideNav
                 onSelect={(selected) => {
-                    // const to = '/' + selected;
-                    // if (location.pathname !== to) {
-                    //     history.push(to);
+                     //const to = '/' + selected;
+                     //if (location.pathname !== to) {
+                     //    history.push(to);
                     // }
                 }}>
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="home">
                     <NavItem eventKey="home">
                         <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }}/>
                         </NavIcon>
                         <NavText>
                             Home
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="devices">
+                    <NavItem eventKey="tochat">
                         <NavIcon>
-                            <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }} />
+                            <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }} onClick={this.toChat} />
                         </NavIcon>
                         <NavText>
-                            Devices
+                            To Chat
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="logout" onSelect={this.logout} >

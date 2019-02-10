@@ -5,7 +5,6 @@ import './index.css';
 import Login from './components/login';
 import Register from './components/register';
 import HomePage from './components/homepage';
-import ChatApp from './components/ChatApp';
 
 ReactDOM.render(
     <div>
@@ -14,7 +13,6 @@ ReactDOM.render(
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/home" component={HomePage} />
-                <Route path="/ChatApp" component={ChatApp} />
                 <Route component={Login} />
             </Switch>
         </BrowserRouter>

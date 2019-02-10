@@ -14,7 +14,7 @@ class Messages extends React.Component {
     const messages = this.props.messages.map((message, i) => {
         return (
           <Message
-            key={i}
+            Key={i}
             Mail={message.Mail}
             message={message.message}
             fromMe={message.fromMe} />

@@ -15,14 +15,14 @@ class ChatApp extends React.Component {
   }
 
   sendHandler(message) {
+    
     const messageObject = {
-      id:0,
-      idSender:0,
-      idReceiver:0,
+      idSender:1,
+      idReceiver:2,
       message1: message,
       date: new Date().toLocaleString(),
       file:'',
-      idGroup:0
+      idGroup:null
     }
     this.addMessage(messageObject);
   }
@@ -33,6 +33,8 @@ class ChatApp extends React.Component {
     this.setState({ messages });
     PostData('api/values/sendMessage', message)
   }
+
+
 
   comeBack(){
     window.location = '/home';

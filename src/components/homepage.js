@@ -4,6 +4,7 @@ import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import axios from 'axios';
 import './login.css';
+import ChatApp from './ChatApp';
 
 class HomePage extends Component {
     constructor(props) {
@@ -88,14 +89,16 @@ class HomePage extends Component {
                                 Home
                             </NavText>
                         </NavItem>
-                        <NavItem eventKey="tochat" onClick={this.toChat}>
+                        
+                        {/*<NavItem eventKey="tochat" onClick={this.toChat}>
                             <NavIcon>
                                 <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }}  />
                             </NavIcon>
                             <NavText>
                                 To Chat
                             </NavText>
-                        </NavItem>
+                        </NavItem>*/}
+                        
                         <NavItem eventKey="logout" onSelect={this.logout} >
                             <NavIcon>
                                 <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
@@ -108,6 +111,11 @@ class HomePage extends Component {
                     {/* https://reactjsexample.com/react-side-nav-component/ */}
                 </SideNav>
 
+                    <div>
+                        
+                        <div className="container"><ChatApp ></ChatApp></div>
+                        
+                    </div>
             
             </div>
         );

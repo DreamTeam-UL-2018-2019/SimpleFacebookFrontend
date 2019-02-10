@@ -7,8 +7,8 @@ class Message extends React.Component {
 
     return (
       <div className={`message ${fromMe}`}>
-        <div className='username'>
-          { this.props.username }
+        <div className='Mail'>
+          { this.props.Mail }
         </div>
         <div className='message-body'>
           { this.props.message }
@@ -20,7 +20,7 @@ class Message extends React.Component {
 
 Message.defaultProps = {
   message: '',
-  username: '',
+  Mail: '',
   fromMe: false
 };
 

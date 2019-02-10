@@ -15,7 +15,7 @@ class Messages extends React.Component {
         return (
           <Message
             key={i}
-            username={message.username}
+            Mail={message.Mail}
             message={message.message}
             fromMe={message.fromMe} />
         );

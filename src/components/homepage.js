@@ -62,9 +62,6 @@ class HomePage extends Component {
 
     toChat(){
         window.location = '/ChatApp';
-        //if (this.state.redirect) {
-        //    return (<Redirect to={'/ChatApp'} />)
-        //}
     }
 
     render() {
@@ -73,42 +70,46 @@ class HomePage extends Component {
         }
 
         return (
-            <SideNav
-                onSelect={(selected) => {
-                     //const to = '/' + selected;
-                     //if (location.pathname !== to) {
-                     //    history.push(to);
-                    // }
-                }}>
-                <SideNav.Toggle />
-                <SideNav.Nav defaultSelected="home">
-                    <NavItem eventKey="home">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }}/>
-                        </NavIcon>
-                        <NavText>
-                            Home
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="tochat">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }} onClick={this.toChat} />
-                        </NavIcon>
-                        <NavText>
-                            To Chat
-                        </NavText>
-                    </NavItem>
-                    <NavItem eventKey="logout" onSelect={this.logout} >
-                        <NavIcon>
-                            <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>
-                            Logout
-                        </NavText>
-                    </NavItem>
-                </SideNav.Nav>
-                {/* https://reactjsexample.com/react-side-nav-component/ */}
-            </SideNav>
+            <div>
+                <SideNav
+                    onSelect={(selected) => {
+                        //const to = '/' + selected;
+                        //if (location.pathname !== to) {
+                        //    history.push(to);
+                        // }
+                    }}>
+                    <SideNav.Toggle />
+                    <SideNav.Nav defaultSelected="home">
+                        <NavItem eventKey="home">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }}/>
+                            </NavIcon>
+                            <NavText>
+                                Home
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="tochat" onClick={this.toChat}>
+                            <NavIcon>
+                                <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }}  />
+                            </NavIcon>
+                            <NavText>
+                                To Chat
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="logout" onSelect={this.logout} >
+                            <NavIcon>
+                                <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
+                            </NavIcon>
+                            <NavText>
+                                Logout
+                            </NavText>
+                        </NavItem>
+                    </SideNav.Nav>
+                    {/* https://reactjsexample.com/react-side-nav-component/ */}
+                </SideNav>
+
+            
+            </div>
         );
     };
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
+import { FormGroup } from 'reactstrap';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -16,14 +17,11 @@ class Groups extends Component {
         super(props);
         this.state = {
             redirect: false,
-            slideMenuActive: false,
-            expanded: false,
             userGroup: [],
+            groupName: "",
         }
         this.test = this.test.bind(this);
-        this.menuIsOpen = this.menuIsOpen.bind(this);
-        this.onToggle = this.onToggle.bind(this);
-
+        this.addNewGroup = this.addNewGroup.bind(this);
     }
 
     static requestHeaders() {
@@ -38,6 +36,23 @@ class Groups extends Component {
         else {
             this.setState({ redirect: true });
         }
+    }
+
+    addNewGroup(){
+        var jwtDecode = require('jwt-decode');
+        const token = sessionStorage.getItem("token");
+
+        var user = jwtDecode(token).user;
+        console.log("groupName: " + user);
+        axios.post("https://localhost:44389/api/values/newGroup/" + user.Id, {Name: this.state.groupName})
+            .then(res => {
+                this.getUserGroup();
+                this.setState({groupName: ""});
+            });
+    }
+
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     getUserGroup() {
@@ -57,58 +72,64 @@ class Groups extends Component {
         console.log("id " + id)
     }
 
-    onToggle = (expanded) => {
-        console.log("działa");
-        this.setState({ expanded: expanded });
-    };
+    deleteGroup = (id) => {
+        var jwtDecode = require('jwt-decode');
+        const token = sessionStorage.getItem("token");
+        var user = jwtDecode(token).user;
 
-    menuIsOpen() {
-        this.setState({ slideMenuActive: true })
-    }
-
-    closeMenu() {
-        this.setState({ menuOpen: false });
+        axios.delete('https://localhost:44389/api/values/delete/' + id + '/' + user.Id)
+            .then(res => {
+                this.getUserGroup();
+            }
+            );
     }
 
     toChat() {
         window.location = './public/chatwindow.html';
     }
 
-    navigate = (x) => {
-        console.log(x);
-    }
-
     render() {
-        const expanded = this.state.expanded;
 
         if (this.state.redirect) {
             return (<Redirect to={'/login'} />)
         }
 
         return (
-            <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">Nazwa grupy</TableCell>
-                            <TableCell align="center"></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.userGroup.map(group => (
-                            <TableRow key={group.id}>
-                                <TableCell style={{ width: '80%' }} component="th">
-                                    {group.name}
-                                </TableCell>
-                                <TableCell style={{ width: '20%' }} align="right">
-                                    <Button onClick={() => this.test(group.id)}>Usun</Button>
-                                </TableCell>
+            <div>
+                <Paper style={{marginTop: '20px'}}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Nazwa grupy</TableCell>
+                                <TableCell align="center"></TableCell>
+                                <TableCell align="center"></TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <Button onClick={this.test}>Jakiś tekst</Button>
-            </Paper>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.userGroup.map(group => (
+                                <TableRow key={group.id}>
+                                    <TableCell style={{ width: '80%' }} component="th">
+                                        {group.name}
+                                    </TableCell>
+                                    <TableCell style={{ width: '20%' }} align="right">
+                                        <Button onClick={() => this.test(group.id)}>Chat</Button>
+                                    </TableCell>
+                                    <TableCell style={{ width: '20%' }} align="right">
+                                        <Button onClick={() => this.deleteGroup(group.id)}>Usun</Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Paper>
+                <Paper style={{marginTop: '20px'}}>
+                    <FormGroup>  
+                        <TextField id="group-name" label="Nazwa grupy" value={this.state.groupName} onChange={this.handleChange} name="groupName"
+                            margin="normal" variant="outlined" />
+                    </FormGroup>
+                    <Button onClick={this.addNewGroup}>Dodaj swoją grupę</Button>
+                </Paper>
+            </div>
         );
     };
 }

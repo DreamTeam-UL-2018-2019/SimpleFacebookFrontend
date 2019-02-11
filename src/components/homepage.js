@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
-import { Button } from "@material-ui/core";
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableBody from '@material-ui/core/TableBody';
 import axios from 'axios';
 import Groups from './groups.js';
+import UserProfile from './userProfile.js';
 import './homepage.css';
 
 class HomePage extends Component {
@@ -93,7 +87,6 @@ class HomePage extends Component {
 
     render() {
         const expanded = this.state.expanded;
-        const sel = this.state.selectNav;
         if (this.state.redirect) {
             return (<Redirect to={'/login'} />)
         }
@@ -104,6 +97,45 @@ class HomePage extends Component {
                 <div>
                     <div className="Paper" style={{ marginLeft: expanded ? 240 : 'auto' }}>
                         <Groups />
+                    </div>
+                    <SideNav onToggle={this.onToggle} onSelect={this.onSelect}>
+                        <SideNav.Toggle />
+                        <SideNav.Nav defaultSelected="home">
+                            <NavItem eventKey="home" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Home
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="group" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Your groups
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="logout" onSelect={this.logout} >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Logout
+                                </NavText>
+                            </NavItem>
+                        </SideNav.Nav>
+                        {/* https://reactjsexample.com/react-side-nav-component/ */}
+                    </SideNav>
+                </div>
+            );
+        }
+        else if (this.state.selectNav === 'home'){
+            return (
+                <div>
+                    <div className="Paper" style={{ marginLeft: expanded ? 240 : 'auto' }}>
+                        <UserProfile />
                     </div>
                     <SideNav onToggle={this.onToggle} onSelect={this.onSelect}>
                         <SideNav.Toggle />

@@ -25,9 +25,16 @@ class Messages extends React.Component {
   render() {
     const messages = this.state.messages.map((message)=> {
       return(
-      <div className='message-body'>
-        {message.message1 }
+
+        <div className='listOfMessages'>
+            <div className='Mail'>
+              { this.props.Mail }
+            </div>
+            <div className='message-body'>
+              {message.message1 }
+            </div>
       </div>);
+      
     });
     return (
       <div className='messages' id='messageList'>

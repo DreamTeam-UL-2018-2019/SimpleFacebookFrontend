@@ -10,12 +10,11 @@ class ChatApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { messages: [] };
-  
     this.sendHandler = this.sendHandler.bind(this);
   }
 
-  sendHandler(message) {
-    
+  sendHandler(message)
+  {
     const messageObject = {
       idSender:1,
       idReceiver:2,
@@ -27,27 +26,22 @@ class ChatApp extends React.Component {
     this.addMessage(messageObject);
   }
 
-  addMessage(message) {
-    const messages = this.state.messages;
-    messages.push(message);
-    this.setState({ messages });
+  addMessage(message) 
+  {
     PostData('api/values/sendMessage', message)
   }
-
-
-
-  comeBack(){
+  
+  comeBack()
+  {
     window.location = '/home';
-}
+  }
 
   render() {
     return (
-      <div className="container">
-        <h3>React Chat App</h3>
-        
+      <div className="container" >
+        <h3>Chat</h3>
         <Messages messages={this.state.messages} />
         <ChatInput onSend={this.sendHandler} />
-
       </div>
     );
   }

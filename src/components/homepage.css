@@ -1,0 +1,6 @@
+.Paper{
+    width: 80%;
+    margin-left: calc(10% - 64px);
+    margin-right: auto;
+    position: relative;
+}

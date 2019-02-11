@@ -12,7 +12,8 @@ class Messages extends React.Component {
     const objDiv = document.getElementById('messageList');
     objDiv.scrollTop = objDiv.scrollHeight;
   }
-  
+
+
   componentDidMount(){
     axios.get('https://localhost:44389/api/values/getMessage')
     .then(res => {

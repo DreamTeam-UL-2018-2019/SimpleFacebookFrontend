@@ -16,7 +16,7 @@ class ChatApp extends React.Component {
   sendHandler(message)
   {
     const messageObject = {
-      idSender:1,
+      idSender: 1,
       idReceiver:2,
       message1: message,
       date: new Date().toLocaleString(),
@@ -26,16 +26,19 @@ class ChatApp extends React.Component {
     this.addMessage(messageObject);
   }
 
+  //getUserId() {
+   // var jwtDecode = require('jwt-decode');
+    //const token = sessionStorage.getItem("token");
+    //var userId = jwtDecode(token).user.idSender;
+   // console.log(userId);
+   // return userId;
+ // }
+
   addMessage(message) 
   {
     PostData('api/values/sendMessage', message)
   }
   
-  comeBack()
-  {
-    window.location = '/home';
-  }
-
   render() {
     return (
       <div className="container" >

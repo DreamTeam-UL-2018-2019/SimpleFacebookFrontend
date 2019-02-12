@@ -5,6 +5,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import axios from 'axios';
 import Groups from './groups.js';
 import UserProfile from './userProfile.js';
+import ChatApp from './ChatApp';
 import './homepage.css';
 
 class HomePage extends Component {
@@ -117,6 +118,14 @@ class HomePage extends Component {
                                     Your groups
                                 </NavText>
                             </NavItem>
+                            <NavItem eventKey="chat" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Chat
+                                </NavText>
+                            </NavItem>
                             <NavItem eventKey="logout" onSelect={this.logout} >
                                 <NavIcon>
                                     <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
@@ -154,6 +163,61 @@ class HomePage extends Component {
                                 </NavIcon>
                                 <NavText>
                                     Your groups
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="chat" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Chat
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="logout" onSelect={this.logout} >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-logout" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Logout
+                                </NavText>
+                            </NavItem>
+                        </SideNav.Nav>
+                        {/* https://reactjsexample.com/react-side-nav-component/ */}
+                    </SideNav>
+                </div>
+            );
+        }
+        else if (this.state.selectNav === 'chat'){
+            return (
+                <div>
+                    <div className="Paper" style={{ marginLeft: expanded ? 240 : 'auto' }}>
+                        <div className="container"><ChatApp ></ChatApp></div>
+                    </div>
+                    <SideNav onToggle={this.onToggle} onSelect={this.onSelect}>
+                        <SideNav.Toggle />
+                        <SideNav.Nav defaultSelected="home">
+                            <NavItem eventKey="home" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Home
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="group" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-device1" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Your groups
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="chat" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Chat
                                 </NavText>
                             </NavItem>
                             <NavItem eventKey="logout" onSelect={this.logout} >
@@ -194,6 +258,14 @@ class HomePage extends Component {
                                 </NavIcon>
                                 <NavText>
                                     Your groups
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="chat" >
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Chat
                                 </NavText>
                             </NavItem>
                             <NavItem eventKey="logout" onSelect={this.logout} >

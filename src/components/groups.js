@@ -9,6 +9,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
+import {withRouter} from 'react-router-dom'
+
 import axios from 'axios';
 import './homepage.css';
 
@@ -19,9 +21,14 @@ class Groups extends Component {
             redirect: false,
             userGroup: [],
             groupName: "",
+            userId: '',
+            groupId: '',
+            groupRedirect: false,
+            groupUrl: ''
         }
-        this.test = this.test.bind(this);
+        //this.test = this.test.bind(this);
         this.addNewGroup = this.addNewGroup.bind(this);
+        this.openChat = this.openChat.bind(this);
     }
 
     static requestHeaders() {
@@ -31,6 +38,10 @@ class Groups extends Component {
     componentWillMount() {
         if (sessionStorage.getItem("token")) {
             console.log("Call user feed");
+            var jwtDecode = require('jwt-decode');
+            const token = sessionStorage.getItem("token");
+            var user = jwtDecode(token).user;
+            this.setState({userId: user.Id});
             this.getUserGroup();
         }
         else {
@@ -68,8 +79,13 @@ class Groups extends Component {
             });
     }
 
-    test = (id) => {
-        console.log("id " + id)
+    openChat = (id, event) => {
+        console.log('id grup: ', id);
+        console.log("Id user");
+        console.log(this.state.userId);
+        var string = '/chat/' + id + '/' + this.state.userId;
+        this.setState({groupRedirect: true});
+        this.props.history.push(string);
     }
 
     deleteGroup = (id) => {
@@ -84,14 +100,15 @@ class Groups extends Component {
             );
     }
 
-    toChat() {
-        window.location = './public/chatwindow.html';
-    }
-
     render() {
 
         if (this.state.redirect) {
             return (<Redirect to={'/login'} />)
+        }
+
+        if(this.state.redirectGroup)
+        {
+            return (<Redirect to={this.state.groupUrl} />)
         }
 
         return (
@@ -112,7 +129,7 @@ class Groups extends Component {
                                         {group.name}
                                     </TableCell>
                                     <TableCell style={{ width: '20%' }} align="right">
-                                        <Button onClick={() => this.test(group.id)}>Chat</Button>
+                                        <Button onClick={() => this.openChat(group.id)}>Chat</Button>
                                     </TableCell>
                                     <TableCell style={{ width: '20%' }} align="right">
                                         <Button onClick={() => this.deleteGroup(group.id)}>Usun</Button>
@@ -133,4 +150,4 @@ class Groups extends Component {
         );
     };
 }
-export default Groups;
+export default withRouter(Groups);
